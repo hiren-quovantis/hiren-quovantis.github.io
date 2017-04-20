@@ -1,1 +1,40 @@
-Hello World
+<html>
+<head>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+			  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+			  crossorigin="anonymous"></script>
+</head>
+<body>
+<input type="text" id="search" placeholder="Search user by name">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+			  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+			  crossorigin="anonymous"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$( "#search" ).autocomplete({
+      source: function( request, response ) {
+		  var regex = new RegExp(request.term, 'i');
+		  if(xhr){
+			xhr.abort();
+		  }
+		  xhr = $.ajax({
+			  url: "source.json",
+			  dataType: "json",
+			  cache: false,
+			  success: function(data) {
+				response($.map(data.list, function(item) {
+				  if(regex.test(item.name)){
+					return {
+						label: item.label
+					};
+				  }
+				}));
+			  }
+		  });
+		},
+    });
+});
+    
+</script>
+</body>
+</html>
