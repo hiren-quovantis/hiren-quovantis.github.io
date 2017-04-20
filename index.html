@@ -3,6 +3,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 			  crossorigin="anonymous"></script>
+<style src="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css"></style>
 </head>
 <body>
 <input type="text" id="search" placeholder="Search user by name">
@@ -10,7 +11,7 @@
 			  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
 			  crossorigin="anonymous"></script>
 <script type="text/javascript">
-var xhr;
+	var xhr;
 $(document).ready(function(){
 	$( "#search" ).autocomplete({
       source: function( request, response ) {
@@ -23,10 +24,10 @@ $(document).ready(function(){
 			  dataType: "json",
 			  cache: false,
 			  success: function(data) {
-				response($.map(data.list, function(item) {
+				response($.map(data, function(item) {
 				  if(regex.test(item.name)){
 					return {
-						label: item.label
+						label: item.name
 					};
 				  }
 				}));
